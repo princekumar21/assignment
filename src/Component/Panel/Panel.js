@@ -63,43 +63,58 @@ const Child = ({ data }) => {
 
     const { width, height, x, y } = panel.getBoundingClientRect();
 
-    const resizeTop = () => {
-      panel.style.height = `${height - movementY}px`;
-      panel.style.top = `${y + movementY}px`;
-    };
-
-    const resizeRight = () => {
+    const bottomRightWidth = () => {
       panel.style.width = `${width + movementX}px`;
     };
 
-    const resizeBottom = () => {
-      panel.style.height = `${height + movementY}px`;
+    const bottomRightHeight = () => {
+      panel.style.height = panel.style.width;
     };
 
-    const resizeLeft = () => {
+    const topRightHeight = () => {
+      panel.style.height = `${height - movementY}px`;
+      panel.style.top = `${y + movementY}px`;
+    };
+    const topRightWidth = () => {
+      panel.style.width = panel.style.height;
+    };
+
+    const bottomLeftWidth = () => {
       panel.style.width = `${width - movementX}px`;
       panel.style.left = `${x + movementX}px`;
+    };
+    const bottomLeftHeight = () => {
+      panel.style.height = panel.style.width;
+    };
+
+    const topLeftHeight = () => {
+      panel.style.height = `${height - movementY}px`;
+      panel.style.top = `${y + movementY}px`;
+    };
+    const topLeftWidth = () => {
+      panel.style.width = `${width - movementY}px`;
+      panel.style.left = `${x + movementY}px`;
     };
 
     switch (direction) {
       case Direction.TopLeft:
-        resizeTop();
-        resizeLeft();
+        topLeftHeight();
+        topLeftWidth();
         break;
 
       case Direction.TopRight:
-        resizeTop();
-        resizeRight();
+        topRightHeight();
+        topRightWidth();
         break;
 
       case Direction.BottomRight:
-        resizeBottom();
-        resizeRight();
+        bottomRightWidth();
+        bottomRightHeight();
         break;
 
       case Direction.BottomLeft:
-        resizeBottom();
-        resizeLeft();
+        bottomLeftWidth();
+        bottomLeftHeight();
         break;
 
       default:
